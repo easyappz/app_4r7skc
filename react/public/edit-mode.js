@@ -140,9 +140,9 @@ document.addEventListener('DOMContentLoaded', function() {
       messageData,
     });
 
-    // if (window.parent.postMessage) {
-    //   window.parent.postMessage(messageData, '*');
-    // }
+    if (window.parent.postMessage) {
+      window.parent.postMessage(messageData, '*');
+    }
   }
 
   // Инициализация при загрузке, если режим уже активен
