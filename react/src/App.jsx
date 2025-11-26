@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     if (typeof window !== 'undefined' && typeof window.handleRoutes === 'function') {
       /** Нужно передавать список существующих роутов */
-      window.handleRoutes(['/', '/login', '/register']);
+      window.handleRoutes(['/', '/login', '/register', '/profile/:id', '/search', '/settings']);
     }
   }, []);
 
@@ -34,6 +34,21 @@ function App() {
               </PublicRoute>
             } />
             <Route path="/" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile/:id" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } />
+            <Route path="/search" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
               <ProtectedRoute>
                 <Home />
               </ProtectedRoute>
