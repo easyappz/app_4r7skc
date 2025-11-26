@@ -10,6 +10,7 @@ import { Register } from './pages/Register';
 import { Feed } from './pages/Feed';
 import { Profile } from './pages/Profile';
 import { Settings } from './pages/Settings';
+import { Search } from './pages/Search';
 import './App.css';
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
             } />
             <Route path="/search" element={
               <ProtectedRoute>
-                <Home />
+                <Search />
               </ProtectedRoute>
             } />
             <Route path="/settings" element={

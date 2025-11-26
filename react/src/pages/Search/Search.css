@@ -1,0 +1,95 @@
+.search-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-container {
+  width: 100%;
+}
+
+.search-header {
+  margin-bottom: 30px;
+}
+
+.search-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 18px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.search-results {
+  width: 100%;
+}
+
+.search-message {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  font-size: 18px;
+}
+
+.search-message p {
+  margin: 0;
+}
+
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .search-page {
+    padding: 15px;
+  }
+
+  .search-header h1 {
+    font-size: 24px;
+  }
+
+  .search-input {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+
+  .search-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .search-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .search-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
