@@ -9,6 +9,7 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Feed } from './pages/Feed';
 import { Profile } from './pages/Profile';
+import { Settings } from './pages/Settings';
 import './App.css';
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
             } />
             <Route path="/settings" element={
               <ProtectedRoute>
-                <Home />
+                <Settings />
               </ProtectedRoute>
             } />
           </Routes>

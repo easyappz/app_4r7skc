@@ -38,12 +38,17 @@ export const AuthProvider = ({ children }) => {
     return userData;
   };
 
+  const updateUser = (userData) => {
+    setUser(userData);
+  };
+
   const value = {
     user,
     loading,
     login,
     logout,
     register,
+    updateUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
