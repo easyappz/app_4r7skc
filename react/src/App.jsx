@@ -7,6 +7,7 @@ import { PublicRoute } from './components/PublicRoute';
 import { Home } from './components/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
+import { Feed } from './pages/Feed';
 import './App.css';
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
             } />
             <Route path="/" element={
               <ProtectedRoute>
-                <Home />
+                <Feed />
               </ProtectedRoute>
             } />
             <Route path="/profile/:id" element={
