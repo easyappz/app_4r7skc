@@ -4,7 +4,7 @@ import ErrorBoundary from './ErrorBoundary';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { PublicRoute } from './components/PublicRoute';
-import { Home } from './components/Home';
+import { Layout } from './components/Layout';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Feed } from './pages/Feed';
@@ -24,8 +24,8 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <AuthProvider>
+      <AuthProvider>
+        <BrowserRouter>
           <Routes>
             <Route path="/login" element={
               <PublicRoute>
@@ -39,27 +39,35 @@ function App() {
             } />
             <Route path="/" element={
               <ProtectedRoute>
-                <Feed />
+                <Layout>
+                  <Feed />
+                </Layout>
               </ProtectedRoute>
             } />
             <Route path="/profile/:id" element={
               <ProtectedRoute>
-                <Profile />
+                <Layout>
+                  <Profile />
+                </Layout>
               </ProtectedRoute>
             } />
             <Route path="/search" element={
               <ProtectedRoute>
-                <Search />
+                <Layout>
+                  <Search />
+                </Layout>
               </ProtectedRoute>
             } />
             <Route path="/settings" element={
               <ProtectedRoute>
-                <Settings />
+                <Layout>
+                  <Settings />
+                </Layout>
               </ProtectedRoute>
             } />
           </Routes>
-        </AuthProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </AuthProvider>
     </ErrorBoundary>
   );
 }
