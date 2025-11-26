@@ -8,6 +8,7 @@ import { Home } from './components/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Feed } from './pages/Feed';
+import { Profile } from './pages/Profile';
 import './App.css';
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
             } />
             <Route path="/profile/:id" element={
               <ProtectedRoute>
-                <Home />
+                <Profile />
               </ProtectedRoute>
             } />
             <Route path="/search" element={

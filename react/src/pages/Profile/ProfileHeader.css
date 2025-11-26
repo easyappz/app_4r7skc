@@ -1,0 +1,183 @@
+.profile-header {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.profile-cover {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-cover-gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.profile-header-content {
+  padding: 0 32px 16px;
+}
+
+.profile-header-top {
+  margin-top: -84px;
+  margin-bottom: 16px;
+}
+
+.profile-avatar-wrapper {
+  display: inline-block;
+}
+
+.profile-avatar {
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1877f2 0%, #0d5dbf 100%);
+  border: 4px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.profile-header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-name {
+  font-size: 32px;
+  font-weight: 700;
+  color: #050505;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.profile-bio {
+  font-size: 15px;
+  color: #65676b;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.profile-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.profile-friends-count {
+  font-size: 15px;
+  color: #65676b;
+  font-weight: 600;
+}
+
+.profile-header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.profile-btn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.profile-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.profile-btn-friend {
+  background: #1877f2;
+  color: #fff;
+}
+
+.profile-btn-friend:hover:not(:disabled) {
+  background: #166fe5;
+}
+
+.profile-btn-unfriend {
+  background: #e4e6eb;
+  color: #050505;
+}
+
+.profile-btn-unfriend:hover:not(:disabled) {
+  background: #d8dadf;
+}
+
+.profile-btn-edit {
+  background: #e4e6eb;
+  color: #050505;
+}
+
+.profile-btn-edit:hover:not(:disabled) {
+  background: #d8dadf;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    border-radius: 0;
+  }
+
+  .profile-cover {
+    height: 200px;
+  }
+
+  .profile-header-content {
+    padding: 0 16px 16px;
+  }
+
+  .profile-header-top {
+    margin-top: -60px;
+  }
+
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    font-size: 42px;
+    border-width: 3px;
+  }
+
+  .profile-name {
+    font-size: 24px;
+  }
+
+  .profile-bio {
+    font-size: 14px;
+  }
+
+  .profile-header-info {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profile-header-actions {
+    width: 100%;
+  }
+
+  .profile-btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
