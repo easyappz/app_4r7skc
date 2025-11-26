@@ -55,6 +55,11 @@ USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
+# Session settings for HttpOnly cookies
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -74,6 +79,9 @@ INSTALLED_APPS = [
 # REST Framework configuration
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "api.authentication.CookieAuthentication",
+    ],
 }
 
 # drf-spectacular configuration
