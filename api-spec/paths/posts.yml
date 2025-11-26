@@ -1,0 +1,136 @@
+/api/posts:
+  get:
+    summary: Get news feed
+    description: Retrieve posts from friends and own posts
+    tags:
+      - Posts
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    responses:
+      '200':
+        description: List of posts
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../openapi.yml#/components/schemas/Post'
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+  
+  post:
+    summary: Create post
+    description: Create a new post
+    tags:
+      - Posts
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: string
+            required:
+              - content
+    responses:
+      '201':
+        description: Post created
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Post'
+      '400':
+        description: Invalid input data
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+
+/api/posts/{id}:
+  get:
+    summary: Get post
+    description: Retrieve a specific post by ID
+    tags:
+      - Posts
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Post ID
+    responses:
+      '200':
+        description: Post details
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Post'
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '404':
+        description: Post not found
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+  
+  delete:
+    summary: Delete post
+    description: Delete own post
+    tags:
+      - Posts
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Post ID
+    responses:
+      '204':
+        description: Post deleted
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '403':
+        description: Cannot delete other member's post
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '404':
+        description: Post not found
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'

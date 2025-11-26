@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: Social Network API
+  version: 1.0.0
+  description: API for a minimal social network application
+
+servers:
+  - url: http://localhost:8000
+    description: Development server
+
+paths:
+  # Authentication endpoints
+  /api/auth/register:
+    $ref: './paths/auth.yml#/~1api~1auth~1register'
+  /api/auth/login:
+    $ref: './paths/auth.yml#/~1api~1auth~1login'
+  /api/auth/logout:
+    $ref: './paths/auth.yml#/~1api~1auth~1logout'
+  /api/auth/me:
+    $ref: './paths/auth.yml#/~1api~1auth~1me'
+  
+  # Members endpoints
+  /api/members:
+    $ref: './paths/members.yml#/~1api~1members'
+  /api/members/{id}:
+    $ref: './paths/members.yml#/~1api~1members~1{id}'
+  /api/members/{id}/friend:
+    $ref: './paths/members.yml#/~1api~1members~1{id}~1friend'
+  
+  # Posts endpoints
+  /api/posts:
+    $ref: './paths/posts.yml#/~1api~1posts'
+  /api/posts/{id}:
+    $ref: './paths/posts.yml#/~1api~1posts~1{id}'
+  
+  # Likes endpoints
+  /api/posts/{id}/like:
+    $ref: './paths/likes.yml#/~1api~1posts~1{id}~1like'
+  
+  # Comments endpoints
+  /api/posts/{id}/comments:
+    $ref: './paths/comments.yml#/~1api~1posts~1{id}~1comments'
+  /api/comments/{id}:
+    $ref: './paths/comments.yml#/~1api~1comments~1{id}'
+
+components:
+  schemas:
+    Member:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        is_friend:
+          type: boolean
+          readOnly: true
+          description: Whether current user is friends with this member
+      required:
+        - email
+        - first_name
+        - last_name
+    
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        content:
+          type: string
+        author:
+          $ref: '#/components/schemas/Member'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        likes_count:
+          type: integer
+          readOnly: true
+        is_liked:
+          type: boolean
+          readOnly: true
+          description: Whether current user liked this post
+        comments_count:
+          type: integer
+          readOnly: true
+      required:
+        - content
+    
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        post_id:
+          type: integer
+        author:
+          $ref: '#/components/schemas/Member'
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - content
+    
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        detail:
+          type: string
+  
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+      description: Session cookie authentication

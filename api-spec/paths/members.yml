@@ -1,0 +1,179 @@
+/api/members:
+  get:
+    summary: Search members
+    description: Search for members by name or email
+    tags:
+      - Members
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search query for member name or email
+    responses:
+      '200':
+        description: List of members
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../openapi.yml#/components/schemas/Member'
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+
+/api/members/{id}:
+  get:
+    summary: Get member profile
+    description: Retrieve member profile by ID
+    tags:
+      - Members
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Member ID
+    responses:
+      '200':
+        description: Member profile
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Member'
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '404':
+        description: Member not found
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+  
+  put:
+    summary: Update member profile
+    description: Update current member's profile (only own profile)
+    tags:
+      - Members
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Member ID
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              first_name:
+                type: string
+                maxLength: 150
+              last_name:
+                type: string
+                maxLength: 150
+              email:
+                type: string
+                format: email
+    responses:
+      '200':
+        description: Member profile updated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Member'
+      '400':
+        description: Invalid input data
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '403':
+        description: Cannot update other member's profile
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '404':
+        description: Member not found
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+
+/api/members/{id}/friend:
+  post:
+    summary: Add or remove friend
+    description: Toggle friendship with another member
+    tags:
+      - Members
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Member ID to add/remove as friend
+    responses:
+      '200':
+        description: Friendship status toggled
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_friend:
+                  type: boolean
+                  description: Current friendship status
+                message:
+                  type: string
+                  example: Friend added
+      '400':
+        description: Cannot add yourself as friend
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '404':
+        description: Member not found
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'

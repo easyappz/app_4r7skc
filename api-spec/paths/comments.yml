@@ -1,0 +1,127 @@
+/api/posts/{id}/comments:
+  get:
+    summary: Get post comments
+    description: Retrieve all comments for a specific post
+    tags:
+      - Comments
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Post ID
+    responses:
+      '200':
+        description: List of comments
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../openapi.yml#/components/schemas/Comment'
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '404':
+        description: Post not found
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+  
+  post:
+    summary: Add comment to post
+    description: Create a new comment on a post
+    tags:
+      - Comments
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Post ID
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content:
+                type: string
+            required:
+              - content
+    responses:
+      '201':
+        description: Comment created
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Comment'
+      '400':
+        description: Invalid input data
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '404':
+        description: Post not found
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+
+/api/comments/{id}:
+  delete:
+    summary: Delete comment
+    description: Delete own comment
+    tags:
+      - Comments
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Comment ID
+    responses:
+      '204':
+        description: Comment deleted
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '403':
+        description: Cannot delete other member's comment
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '404':
+        description: Comment not found
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'

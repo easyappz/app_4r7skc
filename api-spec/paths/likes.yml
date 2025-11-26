@@ -1,0 +1,45 @@
+/api/posts/{id}/like:
+  post:
+    summary: Toggle like on post
+    description: Like or unlike a post
+    tags:
+      - Likes
+    x-isSecure: true
+    security:
+      - cookieAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Post ID
+    responses:
+      '200':
+        description: Like status toggled
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_liked:
+                  type: boolean
+                  description: Current like status
+                likes_count:
+                  type: integer
+                  description: Total number of likes
+                message:
+                  type: string
+                  example: Post liked
+      '401':
+        description: Not authenticated
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
+      '404':
+        description: Post not found
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yml#/components/schemas/Error'
