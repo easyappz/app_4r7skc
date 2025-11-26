@@ -5,8 +5,8 @@ import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { PublicRoute } from './components/PublicRoute';
 import { Home } from './components/Home';
-import { Login } from './components/Login';
-import { Register } from './components/Register';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 import './App.css';
 
 function App() {
